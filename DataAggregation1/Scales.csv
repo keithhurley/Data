@@ -1,0 +1,104 @@
+Field,SubScaleName,ScaleName
+C2a,Natural Environment,Motivations
+C2b,Fishery Resource,Motivations
+C2c,Natural Environment,Motivations
+C2d,Social,Motivations
+C2e,Psychological and Physiological,Motivations
+C2f,Psychological and Physiological,Motivations
+C2g,Natural Environment,Motivations
+C2h,Social,Motivations
+C2i,Fishery Resource,Motivations
+C2j,Psychological and Physiological,Motivations
+C2k,Fishery Resource,Motivations
+C2l,Natural Environment,Motivations
+C2m,Psychological and Physiological,Motivations
+C2n,Fishery Resource,Motivations
+C2o,Social,Motivations
+C2p,Social,Motivations
+C2q,Fishery Resource,Motivations
+C2a,Non-Catch,CatchMotivations
+C2b,Catch,CatchMotivations
+C2c,Non-Catch,CatchMotivations
+C2d,Catch,CatchMotivations
+C2e,Catch,CatchMotivations
+C2f,Non-Catch,CatchMotivations
+C2g,Non-Catch,CatchMotivations
+C2h,Non-Catch,CatchMotivations
+C2i,Catch,CatchMotivations
+C2j,Non-Catch,CatchMotivations
+C2k,Catch,CatchMotivations
+C2l,Non-Catch,CatchMotivations
+C2m,Non-Catch,CatchMotivations
+C2n,Catch,CatchMotivations
+C2o,Non-Catch,CatchMotivations
+C2p,Non-Catch,CatchMotivations
+C2q,Catch,CatchMotivations
+E1a,Catch something,Attitudes
+E1b,Size of fish,Attitudes
+E1c,Numbers of fish,Attitudes
+E1d,Harvesting fish,Attitudes
+E1e,Numbers of fish,Attitudes
+E1f,Harvesting fish,Attitudes
+E1g,Catch something,Attitudes
+E1h,Size of fish,Attitudes
+E1i,Harvesting fish,Attitudes
+E1j,Size of fish,Attitudes
+E1k,Catch something,Attitudes
+E1l,Harvesting fish,Attitudes
+E1m,Size of fish,Attitudes
+E1n,Numbers of fish,Attitudes
+E1o,Numbers of fish,Attitudes
+E1p,Catch something,Attitudes
+D1a,Environmental Services,Programs
+D1b,Habitat and Access,Programs
+D1c,Habitat and Access,Programs
+D1d,Environmental Services,Programs
+D1e,Outreach,Programs
+D1f,Outreach,Programs
+D1g,Outreach,Programs
+D1h,Habitat and Access,Programs
+D1i,Game Fish,Programs
+D1j,Environmental Services,Programs
+D1k,Habitat and Access,Programs
+D1l,Game Fish,Programs
+D1m,Outreach,Programs
+D1n,Outreach,Programs
+D1o,Outreach,Programs
+D1p,Habitat and Access,Programs
+D1q,Environmental Services,Programs
+D1r,Outreach,Programs
+D1s,Game Fish,Programs
+D1t,Habitat and Access,Programs
+D1u,Outreach,Programs
+D3a,Social,Barriers
+D3b,Access,Barriers
+D3c,Time,Barriers
+D3d,Knowledge,Barriers
+D3e,Social,Barriers
+D3f,Access,Barriers
+D3g,Access,Barriers
+D3h,Access,Barriers
+D3i,Knowledge,Barriers
+D3j,Knowledge,Barriers
+D3k,Time,Barriers
+D3l,Access,Barriers
+D3m,Social,Barriers
+D3n,Cost,Barriers
+D3o,Cost,Barriers
+D3p,Time,Barriers
+D3q,Knowledge,Barriers
+D3r,Cost,Barriers
+D3s,Knowledge,Barriers
+D3t,Access,Barriers
+Q31a,Complexity and Confusion,Regulations
+Q31b,Trust,Regulations
+Q31c,Trust,Regulations
+Q31d,Trust,Regulations
+Q31e,Complexity and Confusion,Regulations
+Q31f,Objectives,Regulations
+Q31g,Complexity and Confusion,Regulations
+Q31h,Complexity and Confusion,Regulations
+Q31i,Objectives,Regulations
+Q31j,Trust,Regulations
+Q31k,Objectives,Regulations
+Q31l,Objectives,Regulations

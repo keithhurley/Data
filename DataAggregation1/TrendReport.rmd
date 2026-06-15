@@ -1,0 +1,678 @@
+---
+title: "2018 Licensed Angler Survey Trends"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  # word_document: default
+  officedown::rdocx_document
+always_allow_html: yes
+---
+
+```{r setup, echo=FALSE, warning=FALSE, error=FALSE, message=FALSE, fig.width=7.5, fig.height=6.5}
+knitr::opts_chunk$set(echo=FALSE, include=TRUE, warning=FALSE, error=FALSE, message=FALSE,  ft.align="left", fig.width = 7.4)
+options(stringsAsFactors = FALSE)
+#devtools::install_github("davidgohel/officer")
+#devtools::install_github("davidgohel/officedown")
+library(officedown)
+library(rmarkdown)
+library(likert)
+library(knitr)
+library(flextable)
+library(stringr)
+library(foreach)
+library(tictoc)
+library(tidyverse)
+
+tic("run report")
+
+source("..\\BaseFunctions.R") #load file of common functions
+source("TrendTableFunctions.R") #load file of cross tab report functions
+```
+
+```{r getData, echo=FALSE}
+#load data
+#d<- base.loaddata.venues.2018()
+#mydata<-base.loaddata.venues.2018()
+#mydata<-base.loaddata.venues.all()
+#mydata<-mydata[mydata$venue==3,]
+#d<-base.loaddata(myYears=c("2002", "2012", "2018"), myVenues=c("mail", "email"))
+#save(d, file="d_20190715_allyears_email_mail.rData")
+load(file="d_20190715_allyears_email_mail.rData")
+
+#load questions
+#q<-base.loaddata.factorlevels()
+#save(q, file="q_20180215")
+load(file="q_20180215")
+
+#load labels
+l=read.csv(file="..\\..\\Data\\Labels.csv")
+
+#load scales
+s=read.csv(file="..\\..\\Data\\Scales.csv")
+
+#load age distribution of permits for raking
+load(file="../../data/AgeDistributions_2018.rData")
+rm(myPermits2)
+
+rakeVars<-data.frame(surveyYear=c(2018),
+                    rakeVar=c("age_group"))
+rakePopDists<-list(c(ageDist))
+
+```
+
+```{r createFunctions}
+# CreateFlex<-function(x, mergeOnFirst=FALSE) {
+#   require(officer)
+#   require(flextable)
+#   
+#   bigborder=officer:: fp_border(color="black", width = 1.5)
+#   smallborder=officer:: fp_border(color="black", width=0.75)
+#   
+#   myFlex<-  flextable(x) %>%
+#     theme_zebra()
+#   
+#   if(mergeOnFirst==TRUE) {
+#     #merge first column cells  
+#     myFlex <-myFlex %>%
+#         merge_v(j=1, part="body") 
+#       #add border below merged cells in first column
+#       myFlex<-myFlex %>%
+#         border(border.bottom = smallborder, i=rle(cumsum(myFlex$body$spans$columns[,1] ))$values, part="body") 
+#   }
+#   
+#   myFlex <- myFlex %>%
+#     #border_outer(officer:: fp_border(color="black", width = 1.5), part="all") %>%
+#     #add border above and below footer
+#     border(border.bottom = bigborder, border.top = bigborder, part = "header") %>%
+#     #add border at bottom of body
+#     border(border.bottom = bigborder, i=nrow(myFlex$body$spans$rows), part = "body") %>%
+#     padding(j=1, padding.left=3) %>%
+#     align(align="left", part="all") %>%
+#     fontsize(part = "header", size = 10) %>%
+#     fontsize(part="body", size=8) %>%
+#     bold(part="header") %>%
+#     autofit() %>%
+#     width(j = 1, width = 1.2)
+#       
+#   myFlex
+#   }
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, A2, 2018)),"  ", caption.percents, sep="")`
+
+```{r A2_NoFish}
+CreateFt(
+  ArrangeTable(
+    base.summary.percent.selectOne(d, A2) %>% filter(Response=="No"),
+    roundDigits=1
+  )
+)
+```
+
+```{r A2}
+CreatePercPlot(base.summary.percent.selectOne(d, A2), freeScale = FALSE)
+
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, A3, 2018)),"  ", caption.percents, sep="")`
+
+```{r A3_whyNoFish}
+CreateFt(
+  ArrangeTable(
+    base.summary.percent.selectOne(d, A3),
+    roundDigits=1
+  )
+)
+```
+
+```{r A3}
+CreatePercPlot(base.summary.percent.selectOne(d, A3))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, A4, 2018)),"  ", caption.percents, sep="")`
+
+```{r A4_WaterbodyTypes}
+myFields<-d %>% dplyr::select(contains("A4")) %>% select(-contains("Answered")) %>% names()
+CreateFt(ArrangeTable(
+  base.summary.percent.selectAll(d, myFields, myAnsweredVar = A4_Answered),
+  roundDigits = 1))
+```
+
+```{r A4}
+CreatePercPlot(base.summary.percent.selectAll(d , myFields, myAnsweredVar = A4_Answered))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, A5, 2018)),"  ", caption.percents, sep="")`
+
+```{r A5_Methods}
+myFields<-d %>% dplyr::select(contains("A5")) %>% select(-contains("Answered")) %>% names()
+CreateFt(ArrangeTable(
+  base.summary.percent.selectAll(d, myFields, myAnsweredVar = A5_Answered),
+  roundDigits = 1))
+```
+
+```{r A5}
+CreatePercPlot(base.summary.percent.selectAll(d, myFields, myAnsweredVar = A5_Answered))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, A6, 2018)),"  ", caption.percents, sep="")`
+
+```{r A6_techniques}
+myFields<-d %>% dplyr::select(contains("A6")) %>% select(-contains("Answered")) %>% names()
+CreateFt(ArrangeTable(
+  base.summary.percent.selectAll(d, myFields, myAnsweredVar = A6_Answered),
+  roundDigits = 1))
+```
+
+```{r A6}
+CreatePercPlot(base.summary.percent.selectAll(d, myFields, myAnsweredVar = A6_Answered))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, A7, 2018)),"  ", caption.medians, "  ", labels.distance, sep="")`
+
+```{r A7_favoriteMiles}
+CreateFt(ArrangeTableMedians(
+  base.summary.medians(d, A7_miles)%>% mutate(CI=paste(CIupper, "/", CIlower, sep="")),
+  roundDigits = 1) %>% select(-Response))
+```
+
+`r paste(trimws(GetQuestion(q, A8, 2018)),"  ", caption.percents, "  ", labels.distance, sep="")`
+
+```{r A8_mostVisitiedMiles}
+CreateFt(ArrangeTableMedians(
+  base.summary.medians(d, A8_miles)%>% mutate(CI=paste(CIupper, "/", CIlower, sep="")),
+  roundDigits = 1) %>% select(-Response))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, A9, 2018)),"  ", caption.percents, "  ", labels.satisfaction, sep="")`
+
+```{r A9_satisfactionPerc}
+CreateFt(ArrangeTable(
+  base.summary.percent.selectOne(d, A9),
+  roundDigits = 1))
+```
+
+```{r A9}
+CreatePercPlot(base.summary.percent.selectOne(d, A9), freeScale = FALSE)
+```
+
+```{r A9_satisfactionMean}
+CreateFt(ArrangeTable(
+  base.summary.means(d, A9),
+  roundDigits = 1))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, A10, 2018)),"  ", caption.means, sep="")`
+
+```{r A10_parkPermits}
+CreateFt(ArrangeTable(
+  base.summary.percent.selectOne(d, A10),
+  roundDigits = 1))
+```
+
+```{r A10}
+CreatePercPlot(base.summary.percent.selectOne(d, A10), freeScale = FALSE)
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, E7, 2018)),"  ", caption.percents, sep="")`
+
+```{r E7_CO}
+CreateFt(ArrangeTable(
+  base.summary.percent.selectOne(d, E7),
+  roundDigits = 1))
+```
+
+```{r E7}
+CreatePercPlot(base.summary.percent.selectOne(d, E7), freeScale = FALSE)
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, B1, 2018)),"  ", caption.percents, sep="")`
+
+```{r }
+CreateFt(
+  ArrangeTable(
+    base.summary.percent.selectOne(d,B1),
+    roundDigits = 1)
+)
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+```{r fig.height=7}
+CreatePercPlot(base.summary.percent.selectOne(d,B1))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, B1, 2018)),"  ", caption.ranks, sep="")`
+
+```{r B1_rank}
+op<-base.summary.percent.selectOne(d,B1) %>%
+  group_by(Year) %>%
+  arrange(-Value) %>%
+  mutate(Rank=seq(1,length(Value))) %>%
+  ungroup() %>%
+  select(Year, Response, Value, Rank)
+
+CreateFtRanks(ArrangeTableRanks(op))
+
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, B2, 2018)),"  ", caption.percents, sep="")`
+
+```{r }
+myFields<-d %>% dplyr::select(contains("B2")) %>% select(-contains("_")) %>% select(-contains("Answered")) %>% names()
+op<-base.summary.percent.selectAll(d, myFields, B2_Answered)
+CreateFt(ArrangeTable(op,
+    roundDigits = 1)
+         )
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+```{r fig.height=7}
+CreatePercPlot(base.summary.percent.selectOne(d,B1))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, B2, 2018)),"  ", caption.ranks, sep="")`
+
+```{r B2_rank}
+myFields<-d %>% dplyr::select(contains("B2")) %>% select(-contains("_")) %>% select(-contains("Answered")) %>% names()
+
+op<-base.summary.percent.selectAll(d, myFields, B2_Answered) %>%
+  group_by(Year) %>%
+  arrange(-Value) %>%
+  mutate(Rank=seq(1,length(Value))) %>%
+  ungroup() %>%
+  select(Year, Response, Value, Rank)
+
+CreateFtRanks(ArrangeTableRanks(op))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, B3, 2018)),"  ", caption.percents, sep="")`
+
+```{r }
+myFields<-d %>% dplyr::select(contains("B3")) %>% select(-contains("Answered")) %>% select(-contains("oth")) %>% select(-contains("any")) %>% names()
+op<-foreach(i=myFields, .combine="bind_rows") %do% {
+  data.frame(Species=i,
+             ArrangeTable(
+                base.summary.percent.selectOne(d %>% filter(!is.na(get(i))) %>% filter(as.numeric(get(gsub("3", "2", i)))==2),
+                                            !!rlang::sym(i))),
+             check.names = FALSE)
+}
+
+CreateFt(LabelResponses(op,l, responseField="Species"), headerColumn=Species, mergeOnFirst = TRUE)
+
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, B3, 2018)),"  ", caption.means, "  ", labels.release, sep="")`
+
+```{r }
+myFields<-d %>% dplyr::select(contains("B3")) %>% select(-contains("Answered")) %>% select(-contains("oth")) %>% select(-contains("any")) %>% names()
+op<-foreach(i=myFields, .combine="rbind") %do% {
+  base.summary.means(d %>% filter(!is.na(get(i))) %>% filter(as.numeric(get(gsub("3", "2", i)))==2), !!rlang::sym(i))
+}
+
+CreateFt(ArrangeTable(LabelResponses(op, l)))
+```
+
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, C1, 2018)),"  ", caption.percents, sep="")`
+
+January
+
+```{r}
+mydata<-d %>% filter(!is.na("C1Jan_days"))  %>% filter(C1Jan_days<22)
+CreateFt(ArrangeTable(
+  base.summary.percent.selectOne(mydata, C1Jan_days),
+  roundDigits = 1))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, C1, 2018)),"  ", caption.percents, sep="")`
+
+February
+
+```{r}
+mydata<-d %>% filter(!is.na("C1Feb_days"))  %>% filter(C1Feb_days<22)
+CreateFt(ArrangeTable(
+  base.summary.percent.selectOne(mydata, C1Feb_days),
+  roundDigits = 1))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, C1, 2018)),"  ", caption.percents, sep="")`
+
+March
+
+```{r}
+mydata<-d %>% filter(!is.na("C1Mar_days")) %>% filter(C1Mar_days<22)
+CreateFt(ArrangeTable(
+  base.summary.percent.selectOne(mydata, C1Mar_days),
+  roundDigits = 1))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, C1, 2018)),"  ", caption.percents, sep="")`
+
+April
+
+```{r}
+mydata<-d %>% filter(!is.na("C1Apr_days")) %>% filter(C1Apr_days<22)
+CreateFt(ArrangeTable(
+  base.summary.percent.selectOne(mydata, C1Apr_days),
+  roundDigits = 1))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, C1, 2018)),"  ", caption.percents, sep="")`
+
+May
+
+```{r}
+mydata<-d %>% filter(!is.na("C1May_days")) %>% filter(C1May_days<22)
+CreateFt(ArrangeTable(
+  base.summary.percent.selectOne(mydata, C1May_days),
+  roundDigits = 1))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, C1, 2018)),"  ", caption.percents, sep="")`
+
+June
+
+```{r}
+mydata<-d %>% filter(!is.na("C1June_days"))  %>% filter(C1June_days<22)
+CreateFt(ArrangeTable(
+  base.summary.percent.selectOne(mydata, C1June_days),
+  roundDigits = 1))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, C1, 2018)),"  ", caption.percents, sep="")`
+
+July
+
+```{r}
+mydata<-d %>% filter(!is.na("C1July_days"))  %>% filter(C1July_days<22)
+CreateFt(ArrangeTable(
+  base.summary.percent.selectOne(mydata, C1July_days),
+  roundDigits = 1))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, C1, 2018)),"  ", caption.percents, sep="")`
+
+August
+
+```{r}
+mydata<-d %>% filter(!is.na("C1Aug_days"))  %>% filter(C1Aug_days<22)
+CreateFt(ArrangeTable(
+  base.summary.percent.selectOne(mydata, C1Aug_days),
+  roundDigits = 1))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, C1, 2018)),"  ", caption.percents, sep="")`
+
+September
+
+```{r SeptDays}
+mydata<-d %>% filter(!is.na("C1Sept_days"))  %>% filter(C1Sept_days<22)
+CreateFt(ArrangeTable(
+  base.summary.percent.selectOne(mydata, C1Sept_days),
+  roundDigits = 1))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, C1, 2018)),"  ", caption.percents, sep="")`
+
+October
+
+```{r}
+mydata<-d %>% filter(!is.na("C1Oct_days"))  %>% filter(C1Oct_days<22)
+CreateFt(ArrangeTable(
+  base.summary.percent.selectOne(mydata, C1Oct_days),
+  roundDigits = 1))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, C1, 2018)),"  ", "This table represents all respondants to this question including those who did not fish during the given time period.  ", caption.medians, "  ", labels.freq, sep="")`
+
+```{r TotalDays}
+mydata<-d %>% filter(!is.na("C1Total_days") & C1_AnsweredAll==TRUE) 
+myFields<-mydata %>% select(contains("_days"))  %>% select(-contains("Total")) %>% names()
+op<-foreach(i=1:length(myFields), .combine="rbind") %do% {
+  ArrangeTableMedians(base.summary.medians(mydata, myFields[i]) %>% mutate(Response=myFields[i]),
+  roundDigits = 1)
+}
+
+CreateFt(LabelResponses(op,l))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, C1, 2018)),"  ", "Only respondants that fished at least once during the time period were included in this breakdown.  ", caption.medians, "  ", labels.freq, sep="")`
+
+```{r C1_medianDays}
+mydata<-d %>% filter(!is.na("C1Total_days") & C1_AnsweredAll==TRUE)
+myFields<-mydata %>% select(contains("_days")) %>% names()
+op<-foreach(i=1:length(myFields), .combine="rbind") %do% {
+  ArrangeTableMedians(base.summary.medians(mydata %>% filter(get(myFields[i])>0), myFields[i]) %>% mutate(Response=myFields[i]),
+  roundDigits = 1)
+}
+
+CreateFt(LabelResponses(op,l))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, C1, 2018)),"  ", "Only respondants that fished at least once during the time period were included in this breakdown.  ", caption.medians, "  ", labels.freq, sep="")`
+
+```{r C1_medianDaysJoyplot}
+library(ggridges)
+mydata %>%
+  mutate(surveyYear=factor(surveyYear)) %>%
+  filter(!is.na(C1Total_days)) %>%
+  ggplot() +
+  geom_density_ridges(aes(x=C1Total_days, y=surveyYear, fill=surveyYear),scale=5, rel_min_height=0.013 ) +
+  scale_fill_viridis_d(begin=0.3, end=0.8) +
+  labs(x="Total Days", y="") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, C2, 2018)), "  ", caption.means, "  ", labels.importance, sep="")`
+
+```{r C2_motivations}
+myFields<-d %>% dplyr::select(contains("C2")) %>% select(-contains("Answered")) %>% names()
+op<-foreach(i=1:length(myFields), .combine = "rbind") %do% {
+  base.summary.means(d, !!rlang::sym(myFields[i]))
+}
+
+CreateFt(ArrangeTable(SubstitueQuesForResponse(op, q, C2, 2018)))
+```
+
+```{r C2_likert, fig.width=7.5, fig.height=8}
+op<-CreateSubScaleLikertGraphs(d, "Motivations", q)
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+```{r, fig.width=7.5, fig.height=8}
+print(op[[1]])
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+```{r, fig.width=7.5, fig.height=8}
+print(op[[2]])
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+```{r, fig.width=7.5, fig.height=8}
+print(op[[3]])
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+```{r, fig.width=7.5, fig.height=8}
+print(op[[4]])
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, C2, 2018)), "  ", caption.means, "  ", labels.importance, sep="")`
+
+```{r C2_table}
+myFields<-c("motivation_pp","motivation_natural", "motivation_social","motivation_resource")
+op<-foreach(i=myFields, .combine="rbind") %do% {
+  base.summary.means(d%>% filter(get(paste(i,"_AnsweredAll", sep=""))==TRUE), !!rlang::sym(i))
+}
+
+CreateFt(ArrangeTable(LabelResponses(op, l)))
+```
+
+```{r C2_means}
+CreateMeanPlot(LabelResponses(op, l), freeScale = FALSE, numCols=4) + theme(panel.background = element_rect(fill="gray80"))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, C2, 2018)), "  ", caption.means, "  ", labels.importance, sep="")`
+
+```{r}
+myFields<-c("motivation_noncatch","motivation_catch")
+op<-foreach(i=myFields, .combine="rbind") %do% {
+  base.summary.means(d%>% filter(get(paste(i,"_AnsweredAll", sep=""))==TRUE), !!rlang::sym(i))
+}
+
+CreateFt(ArrangeTable(LabelResponses(op, l)))
+```
+
+`r paste(trimws(GetQuestion(q, C2, 2018)), "  ", caption.means, "  ", labels.importance, sep="")`
+
+```{r C2_means_catch}
+CreateMeanPlot(LabelResponses(op, l), freeScale = FALSE, numCols=4) + theme(panel.background = element_rect(fill="gray80"))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, E1, 2018)), "  ", caption.means, "  ", labels.agree, sep="")`
+
+```{r E1, fig.height=8}
+myFields<-d %>% dplyr::select(contains("E1")) %>% select(-contains("Answered")) %>% names()
+op<-foreach(i=1:length(myFields), .combine = "rbind") %do% {
+  base.summary.means(d, !!rlang::sym(myFields[i]))
+}
+
+CreateFt(ArrangeTable(SubstitueQuesForResponse(op, q, E1, 2018)))
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+```{r E1_likert, fig.width=7.5, fig.height=8}
+op<-CreateSubScaleLikertGraphs(d, "Attitudes", q)
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+```{r, fig.width=7.5, fig.height=8}
+print(op[[1]])
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+```{r, fig.width=7.5, fig.height=8}
+print(op[[2]])
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+```{r, fig.width=7.5, fig.height=8}
+print(op[[3]])
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+```{r, fig.width=7.5, fig.height=8}
+print(op[[4]])
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, E1, 2018)), "  ", caption.means, "  ", labels.agree, sep="")`
+
+```{r E1_means_subscales}
+myFields<-c("attitude_catch", "attitude_numbers", "attitude_size", "attitude_harvest")
+
+op<-foreach(i=myFields, .combine="rbind") %do% {
+  base.summary.means(d%>% filter(get(paste(i,"_AnsweredAll", sep=""))==TRUE), !!rlang::sym(i))
+}
+
+CreateFt(ArrangeTable(LabelResponses(op, l)))
+```
+
+```{r E1_means_catch_noncatch}
+CreateMeanPlot(LabelResponses(op, l), freeScale = FALSE, numCols=4) + theme(panel.background = element_rect(fill="gray80"))
+toc()
+```
+
+<!---CHUNK_PAGEBREAK--->
+
+`r paste(trimws(GetQuestion(q, F1, 2018)),"  ", caption.percents, sep="")`
+
+```{r F1, fig.height=7}
+myFields<-d %>% dplyr::select(contains("F1")) %>% select(-contains("Answered")) %>% select(-F1r) %>%names()
+
+CreateFt(
+  ArrangeTable(
+    base.summary.percent.selectAll(d %>% filter(!(surveyYear==2012 & venue=="email") ), myFields, myAnsweredVar=F1_Answered),
+    roundDigits=1)
+  )
+
+```
+
+

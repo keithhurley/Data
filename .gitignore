@@ -1,0 +1,28 @@
+# R binary data files - large, not source-controlled
+*.rData
+*.rdata
+*.RData
+
+# R session artifacts
+.Rhistory
+.RData
+.Rproj.user/
+
+# Temp / lock files
+~$*
+~WRL*.tmp
+Thumbs.db
+
+# Backup files created during aggregation
+*_backup_*.csv
+
+# Large binary source files (keep .csv and .R as source)
+*.sav
+*.zip
+
+# Rendered / output files
+*.pdf
+*.docx
+*.png
+*.jpeg
+*.jpg
