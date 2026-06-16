@@ -421,6 +421,44 @@ base.create.aggregate.variables <- function(mydata, myYears) {
           NA
         )
       )
+
+    ###################################################
+    ####Regulation sub-scales (Q31) - 2025 only
+    ####Sub-scale groupings per Scales.csv (ScaleName == "Regulations")
+    ###################################################
+    ########Complexity and Confusion
+    myFields <- c("Q31a", "Q31e", "Q31g", "Q31h")
+    mydata <- mydata %>%
+      mutate(reg_complexity_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
+      mutate(
+        reg_complexity = ifelse(
+          reg_complexity_AnsweredAll == TRUE,
+          rowMeans(.[myFields], na.rm = TRUE),
+          NA
+        )
+      )
+    ########Trust
+    myFields <- c("Q31b", "Q31c", "Q31d", "Q31j")
+    mydata <- mydata %>%
+      mutate(reg_trust_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
+      mutate(
+        reg_trust = ifelse(
+          reg_trust_AnsweredAll == TRUE,
+          rowMeans(.[myFields], na.rm = TRUE),
+          NA
+        )
+      )
+    ########Objectives
+    myFields <- c("Q31f", "Q31i", "Q31k", "Q31l")
+    mydata <- mydata %>%
+      mutate(reg_objectives_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
+      mutate(
+        reg_objectives = ifelse(
+          reg_objectives_AnsweredAll == TRUE,
+          rowMeans(.[myFields], na.rm = TRUE),
+          NA
+        )
+      )
   }
   ###################################################
   ####Residency Variable

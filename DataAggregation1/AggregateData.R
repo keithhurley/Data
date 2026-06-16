@@ -1,24 +1,4 @@
-d <- base.data.createFactors(d)
-
-# Tag reverse-coded items in FactorLevels_aggregated.csv so the column
-# survives every reaggregation run.
-reversed_fields <- c(
-  "E1a",
-  "E1f",
-  "E1k",
-  "E1l",
-  "Q31a",
-  "Q31b",
-  "Q31d",
-  "Q31f",
-  "Q31i"
-)
-fl_path <- "./Data/DataAggregation1/FactorLevels_aggregated.csv"
-fl <- read.csv(fl_path) %>%
-  mutate(Reversed = Field %in% reversed_fields)
-write.csv(fl, fl_path, row.names = FALSE)
-
-savebrary(foreach)
+library(foreach)
 library(tidyverse)
 library(readxl)
 library(naniar)
@@ -371,12 +351,22 @@ d <- base.create.aggregate.variables(d, myYears = c(2002, 2012, 2018, 2025))
 d <- base.data.createFactors(d)
 
 
-save(d, file = "aggregateData_20260615.rData")
+save(d, file = "aggregateData_20260616.rData")
 
-# Tag reverse-coded items in FactorLevels_aggregated.csv so the column
-# survives every reaggregation run.
-reversed_fields <- c("E1a", "E1f", "E1k", "E1l", "Q31a", "Q31b", "Q31d", "Q31f", "Q31i")
-fl_path <- "./Data/DataAggregation1/FactorLevels_aggregated.csv"
-fl <- read.csv(fl_path) %>%
-  mutate(Reversed = Field %in% reversed_fields)
-write.csv(fl, fl_path, row.names = FALSE)
+# # Tag reverse-coded items in FactorLevels_aggregated.csv so the column
+# # survives every reaggregation run.
+# reversed_fields <- c(
+#   "E1a",
+#   "E1f",
+#   "E1k",
+#   "E1l",
+#   "Q31a",
+#   "Q31b",
+#   "Q31d",
+#   "Q31f",
+#   "Q31i"
+# )
+# fl_path <- "./Data/DataAggregation1/FactorLevels_aggregated.csv"
+# fl <- read.csv(fl_path) %>%
+#   mutate(Reversed = Field %in% reversed_fields)
+# write.csv(fl, fl_path, row.names = FALSE)

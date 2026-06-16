@@ -55,6 +55,9 @@ attitude_catch,Catch Something
 attitude_numbers,Numbers
 attitude_size,Size
 attitude_harvest,Harvest
+reg_complexity,Complexity and Confusion
+reg_trust,Trust
+reg_objectives,Objectives
 A14worm, Worms
 A14leech, Leeches
 A14craw, Crawfish
@@ -99,6 +102,12 @@ B2any,Other
 B2oth,I fished for anything
 Q18a,In Nebraska
 Q18b,Outside Nebraska
-Q23_1,Whether to go fishing
-Q23_2,Which lakes/reservoirs/ponds
-Q23_3,Which rivers/streams/canals
+Q23_1,How often you chose to go fishing
+Q23_2,What lakes, reservoirs, pits, or ponds you chose to fish
+Q23_3,What rivers, streams, or canals you chose to fish
+Q28_1, Bluegill/Sunfish
+Q28_2, Crappie
+Q28_3, Yellow Perch
+Q29_1, Bluegill/Sunfish
+Q29_2, Crappie
+Q29_3, Yellow Perch
