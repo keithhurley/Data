@@ -331,6 +331,7 @@ base.create.aggregate.variables <- function(mydata, myYears) {
         FALSE
       )
     )
+  
   if (any(myYears %in% c(2018))) {
     mydata <- mydata %>%
       mutate(
@@ -345,6 +346,23 @@ base.create.aggregate.variables <- function(mydata, myYears) {
         )
       )
   }
+    
+    if (any(myYears %in% c(2025))) {
+      mydata <- mydata %>%
+        mutate(
+          Q18_Answered = ifelse(
+            rowSums(
+              sapply(
+                .[mydata %>% select(contains("Q18")) %>% names()],
+                function(x) !is.na(x)
+              ),
+              na.rm = TRUE
+            ) > 0,
+            TRUE,
+            FALSE
+          )
+        )
+    }
   #these variables indicated answered all in the list
   if (any(myYears %in% c(2018))) {
     mydata <- mydata %>%
