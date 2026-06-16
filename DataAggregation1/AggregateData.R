@@ -1,6 +1,24 @@
-library(likert)
-library(stringr)
-library(foreach)
+d <- base.data.createFactors(d)
+
+# Tag reverse-coded items in FactorLevels_aggregated.csv so the column
+# survives every reaggregation run.
+reversed_fields <- c(
+  "E1a",
+  "E1f",
+  "E1k",
+  "E1l",
+  "Q31a",
+  "Q31b",
+  "Q31d",
+  "Q31f",
+  "Q31i"
+)
+fl_path <- "./Data/DataAggregation1/FactorLevels_aggregated.csv"
+fl <- read.csv(fl_path) %>%
+  mutate(Reversed = Field %in% reversed_fields)
+write.csv(fl, fl_path, row.names = FALSE)
+
+savebrary(foreach)
 library(tidyverse)
 library(readxl)
 library(naniar)
@@ -34,18 +52,22 @@ newSurveys$surveyYear <- 2025
 #     pull("Mode of completion (Mail, web, phone)") %>% unique()
 # )
 
-
 newSurveys$venue <- newSurveys %>%
   left_join(tracking, by = c("ID" = "CustomerID")) %>%
   mutate(
     ContactMode = case_when(
       grepl("mail", tolower(`Mode of completion (Mail, web, phone)`)) ~ "2",
-      grepl("email",          tolower(`Mode of completion (Mail, web, phone)`)) ~ "1",
-      grepl("text",           tolower(`Mode of completion (Mail, web, phone)`)) ~ "4",
-      grepl("web letter 1|web letter 2|postcard", tolower(`Mode of completion (Mail, web, phone)`)) ~ "3",
+      grepl("email", tolower(`Mode of completion (Mail, web, phone)`)) ~ "1",
+      grepl("text", tolower(`Mode of completion (Mail, web, phone)`)) ~ "4",
+      grepl(
+        "web letter 1|web letter 2|postcard",
+        tolower(`Mode of completion (Mail, web, phone)`)
+      ) ~ "3",
       TRUE ~ NA_character_
     )
-  ) %>% select(`Mode of completion (Mail, web, phone)`,ContactMode) %>% pull(ContactMode)
+  ) %>%
+  select(`Mode of completion (Mail, web, phone)`, ContactMode) %>%
+  pull(ContactMode)
 
 
 #standardize all datasets ----
@@ -119,7 +141,7 @@ newSurveys$A1_recoded[newSurveys$A1 == 26] <- -9
 newSurveys$A1_recoded[newSurveys$A1 == 999] <- -999
 newSurveys$A1 <- newSurveys$A1_recoded
 newSurveys <- newSurveys %>% select(-A1_recoded)
-newSurveys$A1<-newSurveys$A1 * -1
+newSurveys$A1 <- newSurveys$A1 * -1
 
 
 ###recode A3 (why no fish) to match previous surveys and add new factors
@@ -147,7 +169,7 @@ newSurveys$A3_recoded[newSurveys$A3 == 10] <- -8
 newSurveys$A1_recoded[newSurveys$A1 == 999] <- -999
 newSurveys$A3 <- newSurveys$A3_recoded
 newSurveys <- newSurveys %>% select(-A3_recoded)
-newSurveys$A3<-newSurveys$A3 * -1
+newSurveys$A3 <- newSurveys$A3 * -1
 
 
 ###recode B1 (preferred spp) to match previous surveys and add new factors
@@ -280,8 +302,8 @@ newSurveys <- newSurveys %>%
   )
 
 ##change 2's to 0's as No was coded to 2 and historically been 0
-newSurveys$A17priv[newSurveys$A17priv==2]<-0
-newSurveys$A17pub[newSurveys$A17pub==2]<-0
+newSurveys$A17priv[newSurveys$A17priv == 2] <- 0
+newSurveys$A17pub[newSurveys$A17pub == 2] <- 0
 
 #in 2025 recode days fished
 
@@ -313,7 +335,7 @@ newSurveys <- newSurveys %>%
 
 ##flip genders as the codes are inverted in 2025 compared to previous surveys
 newSurveys$E2 <- car::recode(newSurveys$E2, "1=2; 2=1")
-  
+
 
 ###add post weights
 
@@ -332,7 +354,8 @@ newSurveys <- newSurveys %>%
       breaks = c(15, 24, 34, 44, 54, 64, Inf),
       labels = 1:6,
       right = TRUE
-    ) |> as.numeric()
+    ) |>
+      as.numeric()
   )
 
 #combine datasets ----
