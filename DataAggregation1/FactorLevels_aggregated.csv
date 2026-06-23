@@ -3616,7 +3616,7 @@ SelectOne,Anglers are willing to follow complex regulations to produce high-qual
 SelectOne,Anglers are willing to follow complex regulations to produce high-quality fisheries.,Q31c,2025,3,Neither agree nor disagree,FALSE
 SelectOne,Anglers are willing to follow complex regulations to produce high-quality fisheries.,Q31c,2025,4,Slightly agree,FALSE
 SelectOne,Anglers are willing to follow complex regulations to produce high-quality fisheries.,Q31c,2025,5,Strongly agree,FALSE
-SelectOne,Fisheries' managers should avoid site-specific regulations to avoid confusing anglers.,Q31c,2025,1,Strongly disagree,FALSE
+SelectOne,Fisheries' managers should avoid site-specific regulations to avoid confusing anglers.,Q31d,2025,1,Strongly disagree,TRUE
 SelectOne,Fisheries' managers should avoid site-specific regulations to avoid confusing anglers.,Q31d,2025,2,Slightly disagree,TRUE
 SelectOne,Fisheries' managers should avoid site-specific regulations to avoid confusing anglers.,Q31d,2025,3,Neither agree nor disagree,TRUE
 SelectOne,Fisheries' managers should avoid site-specific regulations to avoid confusing anglers.,Q31d,2025,4,Slightly agree,TRUE

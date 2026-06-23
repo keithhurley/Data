@@ -83,11 +83,12 @@ base.getBosrData <- function() {
       C1Oct = C1oct
     )
 
-  #invert E1 questions
-  new_bData$E1a <- car::recode(new_bData$E1a, "1=5; 2=4; 3=3;4=2;5=1")
-  new_bData$E1f <- car::recode(new_bData$E1f, "1=5; 2=4; 3=3;4=2;5=1")
-  new_bData$E1k <- car::recode(new_bData$E1k, "1=5; 2=4; 3=3;4=2;5=1")
-  new_bData$E1l <- car::recode(new_bData$E1l, "1=5; 2=4; 3=3;4=2;5=1")
+  ####data aggregated is raw values...any inversion is in the reporting side
+    # #invert E1 questions
+  # new_bData$E1a <- car::recode(new_bData$E1a, "1=5; 2=4; 3=3;4=2;5=1")
+  # new_bData$E1f <- car::recode(new_bData$E1f, "1=5; 2=4; 3=3;4=2;5=1")
+  # new_bData$E1k <- car::recode(new_bData$E1k, "1=5; 2=4; 3=3;4=2;5=1")
+  # new_bData$E1l <- car::recode(new_bData$E1l, "1=5; 2=4; 3=3;4=2;5=1")
 
   #remove unnecessary fields
   new_bData <- new_bData %>%

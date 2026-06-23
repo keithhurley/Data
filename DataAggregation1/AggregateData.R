@@ -172,14 +172,14 @@ newSurveys <- newSurveys %>% select(-B1_recoded)
 # newSurveys$C1jan <- newSurveys$C1jan_recoded
 # newSurveys <- newSurveys %>% select(-C1jan_recoded)
 
+####data aggregated is raw values...any inversion is in the reporting side
+# #invert E1 questions
+# newSurveys$E1a <- car::recode(newSurveys$E1a, "1=5; 2=4; 3=3;4=2;5=1")
+# newSurveys$E1f <- car::recode(newSurveys$E1f, "1=5; 2=4; 3=3;4=2;5=1")
+# newSurveys$E1k <- car::recode(newSurveys$E1k, "1=5; 2=4; 3=3;4=2;5=1")
+# newSurveys$E1l <- car::recode(newSurveys$E1l, "1=5; 2=4; 3=3;4=2;5=1")
 
-#invert E1 questions
-newSurveys$E1a <- car::recode(newSurveys$E1a, "1=5; 2=4; 3=3;4=2;5=1")
-newSurveys$E1f <- car::recode(newSurveys$E1f, "1=5; 2=4; 3=3;4=2;5=1")
-newSurveys$E1k <- car::recode(newSurveys$E1k, "1=5; 2=4; 3=3;4=2;5=1")
-newSurveys$E1l <- car::recode(newSurveys$E1l, "1=5; 2=4; 3=3;4=2;5=1")
 
-#invert E1 questions
 newSurveys <- newSurveys %>%
   rename(
     Q31a = Q31_1,
@@ -196,12 +196,13 @@ newSurveys <- newSurveys %>%
     Q31l = Q31_12
   )
 
-#invert Q31 regulation questions
-newSurveys$Q31a <- car::recode(newSurveys$Q31a, "1=5; 2=4; 3=3;4=2;5=1")
-newSurveys$Q31b <- car::recode(newSurveys$Q31b, "1=5; 2=4; 3=3;4=2;5=1")
-newSurveys$Q31d <- car::recode(newSurveys$Q31d, "1=5; 2=4; 3=3;4=2;5=1")
-newSurveys$Q31f <- car::recode(newSurveys$Q31f, "1=5; 2=4; 3=3;4=2;5=1")
-newSurveys$Q31i <- car::recode(newSurveys$Q31i, "1=5; 2=4; 3=3;4=2;5=1")
+####data aggregated is raw values...any inversion is in the reporting side
+# #invert Q31 regulation questions
+# newSurveys$Q31a <- car::recode(newSurveys$Q31a, "1=5; 2=4; 3=3;4=2;5=1")
+# newSurveys$Q31b <- car::recode(newSurveys$Q31b, "1=5; 2=4; 3=3;4=2;5=1")
+# newSurveys$Q31d <- car::recode(newSurveys$Q31d, "1=5; 2=4; 3=3;4=2;5=1")
+# newSurveys$Q31f <- car::recode(newSurveys$Q31f, "1=5; 2=4; 3=3;4=2;5=1")
+# newSurveys$Q31i <- car::recode(newSurveys$Q31i, "1=5; 2=4; 3=3;4=2;5=1")
 
 #create combined B2 field
 newCol <- newSurveys %>%
@@ -351,7 +352,7 @@ d <- base.create.aggregate.variables(d, myYears = c(2002, 2012, 2018, 2025))
 d <- base.data.createFactors(d)
 
 
-save(d, file = "aggregateData_20260616.rData")
+save(d, file = "aggregateData_20260622.rData")
 
 # # Tag reverse-coded items in FactorLevels_aggregated.csv so the column
 # # survives every reaggregation run.

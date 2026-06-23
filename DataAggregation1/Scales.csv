@@ -1,104 +1,104 @@
-Field,SubScaleName,ScaleName
-C2a,Natural Environment,Motivations
-C2b,Fishery Resource,Motivations
-C2c,Natural Environment,Motivations
-C2d,Social,Motivations
-C2e,Psychological and Physiological,Motivations
-C2f,Psychological and Physiological,Motivations
-C2g,Natural Environment,Motivations
-C2h,Social,Motivations
-C2i,Fishery Resource,Motivations
-C2j,Psychological and Physiological,Motivations
-C2k,Fishery Resource,Motivations
-C2l,Natural Environment,Motivations
-C2m,Psychological and Physiological,Motivations
-C2n,Fishery Resource,Motivations
-C2o,Social,Motivations
-C2p,Social,Motivations
-C2q,Fishery Resource,Motivations
-C2a,Non-Catch,CatchMotivations
-C2b,Catch,CatchMotivations
-C2c,Non-Catch,CatchMotivations
-C2d,Catch,CatchMotivations
-C2e,Catch,CatchMotivations
-C2f,Non-Catch,CatchMotivations
-C2g,Non-Catch,CatchMotivations
-C2h,Non-Catch,CatchMotivations
-C2i,Catch,CatchMotivations
-C2j,Non-Catch,CatchMotivations
-C2k,Catch,CatchMotivations
-C2l,Non-Catch,CatchMotivations
-C2m,Non-Catch,CatchMotivations
-C2n,Catch,CatchMotivations
-C2o,Non-Catch,CatchMotivations
-C2p,Non-Catch,CatchMotivations
-C2q,Catch,CatchMotivations
-E1a,Catch something,Attitudes
-E1b,Size of fish,Attitudes
-E1c,Numbers of fish,Attitudes
-E1d,Harvesting fish,Attitudes
-E1e,Numbers of fish,Attitudes
-E1f,Harvesting fish,Attitudes
-E1g,Catch something,Attitudes
-E1h,Size of fish,Attitudes
-E1i,Harvesting fish,Attitudes
-E1j,Size of fish,Attitudes
-E1k,Catch something,Attitudes
-E1l,Harvesting fish,Attitudes
-E1m,Size of fish,Attitudes
-E1n,Numbers of fish,Attitudes
-E1o,Numbers of fish,Attitudes
-E1p,Catch something,Attitudes
-D1a,Environmental Services,Programs
-D1b,Habitat and Access,Programs
-D1c,Habitat and Access,Programs
-D1d,Environmental Services,Programs
-D1e,Outreach,Programs
-D1f,Outreach,Programs
-D1g,Outreach,Programs
-D1h,Habitat and Access,Programs
-D1i,Game Fish,Programs
-D1j,Environmental Services,Programs
-D1k,Habitat and Access,Programs
-D1l,Game Fish,Programs
-D1m,Outreach,Programs
-D1n,Outreach,Programs
-D1o,Outreach,Programs
-D1p,Habitat and Access,Programs
-D1q,Environmental Services,Programs
-D1r,Outreach,Programs
-D1s,Game Fish,Programs
-D1t,Habitat and Access,Programs
-D1u,Outreach,Programs
-D3a,Social,Barriers
-D3b,Access,Barriers
-D3c,Time,Barriers
-D3d,Knowledge,Barriers
-D3e,Social,Barriers
-D3f,Access,Barriers
-D3g,Access,Barriers
-D3h,Access,Barriers
-D3i,Knowledge,Barriers
-D3j,Knowledge,Barriers
-D3k,Time,Barriers
-D3l,Access,Barriers
-D3m,Social,Barriers
-D3n,Cost,Barriers
-D3o,Cost,Barriers
-D3p,Time,Barriers
-D3q,Knowledge,Barriers
-D3r,Cost,Barriers
-D3s,Knowledge,Barriers
-D3t,Access,Barriers
-Q31a,Complexity and Confusion,Regulations
-Q31b,Trust,Regulations
-Q31c,Trust,Regulations
-Q31d,Trust,Regulations
-Q31e,Complexity and Confusion,Regulations
-Q31f,Objectives,Regulations
-Q31g,Complexity and Confusion,Regulations
-Q31h,Complexity and Confusion,Regulations
-Q31i,Objectives,Regulations
-Q31j,Trust,Regulations
-Q31k,Objectives,Regulations
-Q31l,Objectives,Regulations
+Field,SubScaleName,ScaleName,Reversed,VarName
+C2a,Natural Environment,Motivations,FALSE,motivation_natural
+C2c,Natural Environment,Motivations,FALSE,motivation_natural
+C2g,Natural Environment,Motivations,FALSE,motivation_natural
+C2l,Natural Environment,Motivations,FALSE,motivation_natural
+C2e,Psychological and Physiological,Motivations,FALSE,motivation_pp
+C2f,Psychological and Physiological,Motivations,FALSE,motivation_pp
+C2j,Psychological and Physiological,Motivations,FALSE,motivation_pp
+C2m,Psychological and Physiological,Motivations,FALSE,motivation_pp
+C2d,Social,Motivations,FALSE,motivation_social
+C2h,Social,Motivations,FALSE,motivation_social
+C2o,Social,Motivations,FALSE,motivation_social
+C2p,Social,Motivations,FALSE,motivation_social
+C2b,Fishery Resource,Motivations,FALSE,motivation_resource
+C2i,Fishery Resource,Motivations,FALSE,motivation_resource
+C2k,Fishery Resource,Motivations,FALSE,motivation_resource
+C2n,Fishery Resource,Motivations,FALSE,motivation_resource
+C2q,Fishery Resource,Motivations,FALSE,motivation_resource
+C2b,Catch,CatchMotivations,FALSE,motivation_catch
+C2d,Catch,CatchMotivations,FALSE,motivation_catch
+C2e,Catch,CatchMotivations,FALSE,motivation_catch
+C2i,Catch,CatchMotivations,FALSE,motivation_catch
+C2k,Catch,CatchMotivations,FALSE,motivation_catch
+C2n,Catch,CatchMotivations,FALSE,motivation_catch
+C2q,Catch,CatchMotivations,FALSE,motivation_catch
+C2a,Non-Catch,CatchMotivations,FALSE,motivation_noncatch
+C2c,Non-Catch,CatchMotivations,FALSE,motivation_noncatch
+C2f,Non-Catch,CatchMotivations,FALSE,motivation_noncatch
+C2g,Non-Catch,CatchMotivations,FALSE,motivation_noncatch
+C2h,Non-Catch,CatchMotivations,FALSE,motivation_noncatch
+C2j,Non-Catch,CatchMotivations,FALSE,motivation_noncatch
+C2l,Non-Catch,CatchMotivations,FALSE,motivation_noncatch
+C2m,Non-Catch,CatchMotivations,FALSE,motivation_noncatch
+C2o,Non-Catch,CatchMotivations,FALSE,motivation_noncatch
+C2p,Non-Catch,CatchMotivations,FALSE,motivation_noncatch
+E1a,Catch something,Attitudes,TRUE,attitude_catch
+E1g,Catch something,Attitudes,FALSE,attitude_catch
+E1k,Catch something,Attitudes,TRUE,attitude_catch
+E1p,Catch something,Attitudes,FALSE,attitude_catch
+E1c,Numbers of fish,Attitudes,FALSE,attitude_numbers
+E1e,Numbers of fish,Attitudes,FALSE,attitude_numbers
+E1n,Numbers of fish,Attitudes,FALSE,attitude_numbers
+E1o,Numbers of fish,Attitudes,FALSE,attitude_numbers
+E1b,Size of fish,Attitudes,FALSE,attitude_size
+E1h,Size of fish,Attitudes,FALSE,attitude_size
+E1j,Size of fish,Attitudes,FALSE,attitude_size
+E1m,Size of fish,Attitudes,FALSE,attitude_size
+E1d,Harvesting fish,Attitudes,FALSE,attitude_harvest
+E1f,Harvesting fish,Attitudes,TRUE,attitude_harvest
+E1i,Harvesting fish,Attitudes,FALSE,attitude_harvest
+E1l,Harvesting fish,Attitudes,TRUE,attitude_harvest
+D1a,Environmental Services,Programs,FALSE,programs_environment
+D1d,Environmental Services,Programs,FALSE,programs_environment
+D1j,Environmental Services,Programs,FALSE,programs_environment
+D1q,Environmental Services,Programs,FALSE,programs_environment
+D1b,Habitat and Access,Programs,FALSE,programs_habitat
+D1c,Habitat and Access,Programs,FALSE,programs_habitat
+D1h,Habitat and Access,Programs,FALSE,programs_habitat
+D1k,Habitat and Access,Programs,FALSE,programs_habitat
+D1p,Habitat and Access,Programs,FALSE,programs_habitat
+D1t,Habitat and Access,Programs,FALSE,programs_habitat
+D1e,Outreach,Programs,FALSE,programs_outreach
+D1f,Outreach,Programs,FALSE,programs_outreach
+D1g,Outreach,Programs,FALSE,programs_outreach
+D1m,Outreach,Programs,FALSE,programs_outreach
+D1n,Outreach,Programs,FALSE,programs_outreach
+D1o,Outreach,Programs,FALSE,programs_outreach
+D1r,Outreach,Programs,FALSE,programs_outreach
+D1u,Outreach,Programs,FALSE,programs_outreach
+D1i,Game Fish,Programs,FALSE,programs_game
+D1l,Game Fish,Programs,FALSE,programs_game
+D1s,Game Fish,Programs,FALSE,programs_game
+D3a,Social,Barriers,FALSE,barriers_social
+D3e,Social,Barriers,FALSE,barriers_social
+D3j,Social,Barriers,FALSE,barriers_social
+D3m,Social,Barriers,FALSE,barriers_social
+D3f,Access,Barriers,FALSE,barriers_access
+D3h,Access,Barriers,FALSE,barriers_access
+D3l,Access,Barriers,FALSE,barriers_access
+D3t,Access,Barriers,FALSE,barriers_access
+D3b,Time,Barriers,FALSE,barriers_time
+D3c,Time,Barriers,FALSE,barriers_time
+D3k,Time,Barriers,FALSE,barriers_time
+D3p,Time,Barriers,FALSE,barriers_time
+D3d,Knowledge,Barriers,FALSE,barriers_knowledge
+D3i,Knowledge,Barriers,FALSE,barriers_knowledge
+D3q,Knowledge,Barriers,FALSE,barriers_knowledge
+D3s,Knowledge,Barriers,FALSE,barriers_knowledge
+D3g,Cost,Barriers,FALSE,barriers_cost
+D3n,Cost,Barriers,FALSE,barriers_cost
+D3o,Cost,Barriers,FALSE,barriers_cost
+D3r,Cost,Barriers,FALSE,barriers_cost
+Q31a,Complexity and Confusion,Regulations,TRUE,reg_complexity
+Q31e,Complexity and Confusion,Regulations,FALSE,reg_complexity
+Q31g,Complexity and Confusion,Regulations,FALSE,reg_complexity
+Q31h,Complexity and Confusion,Regulations,FALSE,reg_complexity
+Q31b,Trust,Regulations,TRUE,reg_trust
+Q31c,Trust,Regulations,FALSE,reg_trust
+Q31d,Trust,Regulations,TRUE,reg_trust
+Q31j,Trust,Regulations,FALSE,reg_trust
+Q31f,Objectives,Regulations,TRUE,reg_objectives
+Q31i,Objectives,Regulations,TRUE,reg_objectives
+Q31k,Objectives,Regulations,FALSE,reg_objectives
+Q31l,Objectives,Regulations,FALSE,reg_objectives

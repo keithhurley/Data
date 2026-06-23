@@ -422,53 +422,43 @@ base.create.aggregate.variables <- function(mydata, myYears) {
         )
       )
 
-# ============================================================================
-# DISABLED 2026-06-22: these scale scores are now computed at REPORT time.
-# The scale means below and their *_AnsweredAll completeness flags are rebuilt
-# by add_scale_scores() in Analysis/BaseFunctions_2025_UPDATED.R, which reads
-# Scales.csv (single source of truth) and applies item reversals before
-# averaging. Kept here (commented) for reference; the reports overwrite these
-# columns after loading, so leaving them disabled avoids duplicate/un-reversed
-# values in the aggregated file. The composite *_AnsweredAll flag is included
-# because it depends on the sub-scale flags disabled here.
-# ============================================================================
-#     ###################################################
-#     ####Regulation sub-scales (Q31) - 2025 only
-#     ####Sub-scale groupings per Scales.csv (ScaleName == "Regulations")
-#     ###################################################
-#     ########Complexity and Confusion
-#     myFields <- c("Q31a", "Q31e", "Q31g", "Q31h")
-#     mydata <- mydata %>%
-#       mutate(reg_complexity_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
-#       mutate(
-#         reg_complexity = ifelse(
-#           reg_complexity_AnsweredAll == TRUE,
-#           rowMeans(.[myFields], na.rm = TRUE),
-#           NA
-#         )
-#       )
-#     ########Trust
-#     myFields <- c("Q31b", "Q31c", "Q31d", "Q31j")
-#     mydata <- mydata %>%
-#       mutate(reg_trust_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
-#       mutate(
-#         reg_trust = ifelse(
-#           reg_trust_AnsweredAll == TRUE,
-#           rowMeans(.[myFields], na.rm = TRUE),
-#           NA
-#         )
-#       )
-#     ########Objectives
-#     myFields <- c("Q31f", "Q31i", "Q31k", "Q31l")
-#     mydata <- mydata %>%
-#       mutate(reg_objectives_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
-#       mutate(
-#         reg_objectives = ifelse(
-#           reg_objectives_AnsweredAll == TRUE,
-#           rowMeans(.[myFields], na.rm = TRUE),
-#           NA
-#         )
-#       )
+    ###################################################
+    ####Regulation sub-scales (Q31) - 2025 only
+    ####Sub-scale groupings per Scales.csv (ScaleName == "Regulations")
+    ###################################################
+    ########Complexity and Confusion
+    myFields <- c("Q31a", "Q31e", "Q31g", "Q31h")
+    mydata <- mydata %>%
+      mutate(reg_complexity_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
+      mutate(
+        reg_complexity = ifelse(
+          reg_complexity_AnsweredAll == TRUE,
+          rowMeans(.[myFields], na.rm = TRUE),
+          NA
+        )
+      )
+    ########Trust
+    myFields <- c("Q31b", "Q31c", "Q31d", "Q31j")
+    mydata <- mydata %>%
+      mutate(reg_trust_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
+      mutate(
+        reg_trust = ifelse(
+          reg_trust_AnsweredAll == TRUE,
+          rowMeans(.[myFields], na.rm = TRUE),
+          NA
+        )
+      )
+    ########Objectives
+    myFields <- c("Q31f", "Q31i", "Q31k", "Q31l")
+    mydata <- mydata %>%
+      mutate(reg_objectives_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
+      mutate(
+        reg_objectives = ifelse(
+          reg_objectives_AnsweredAll == TRUE,
+          rowMeans(.[myFields], na.rm = TRUE),
+          NA
+        )
+      )
   }
   ###################################################
   ####Residency Variable
@@ -483,182 +473,162 @@ base.create.aggregate.variables <- function(mydata, myYears) {
     labels = c("Resident", "Non-Resident")
   )
 
-# ============================================================================
-# DISABLED 2026-06-22: these scale scores are now computed at REPORT time.
-# The scale means below and their *_AnsweredAll completeness flags are rebuilt
-# by add_scale_scores() in Analysis/BaseFunctions_2025_UPDATED.R, which reads
-# Scales.csv (single source of truth) and applies item reversals before
-# averaging. Kept here (commented) for reference; the reports overwrite these
-# columns after loading, so leaving them disabled avoids duplicate/un-reversed
-# values in the aggregated file. The composite *_AnsweredAll flag is included
-# because it depends on the sub-scale flags disabled here.
-# ============================================================================
-#   ###################################################
-#   ####Attitude scales
-#   ###################################################
-#   ########Catch Something
-#   myFields <- c("E1a", "E1k", "E1g", "E1p")
-#   mydata <- mydata %>%
-#     mutate(attitude_catch_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
-#     mutate(
-#       attitude_catch = ifelse(
-#         attitude_catch_AnsweredAll == TRUE,
-#         rowMeans(.[myFields], na.rm = TRUE),
-#         NA
-#       )
-#     )
-#   ########Catch Numbers
-#   myFields <- c("E1e", "E1n", "E1o", "E1c")
-#   mydata <- mydata %>%
-#     mutate(attitude_numbers_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
-#     mutate(
-#       attitude_numbers = ifelse(
-#         attitude_numbers_AnsweredAll == TRUE,
-#         rowMeans(.[myFields], na.rm = TRUE),
-#         NA
-#       )
-#     )
-#   ########Catching Large Fish
-#   myFields <- c("E1j", "E1b", "E1h", "E1m")
-#   mydata <- mydata %>%
-#     mutate(attitude_size_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
-#     mutate(
-#       attitude_size = ifelse(
-#         attitude_size_AnsweredAll == TRUE,
-#         rowMeans(.[myFields], na.rm = TRUE),
-#         NA
-#       )
-#     )
-#   ########Harvesting Fish
-#   myFields <- c("E1i", "E1l", "E1d", "E1f")
-#   mydata <- mydata %>%
-#     mutate(attitude_harvest_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
-#     mutate(
-#       attitude_harvest = ifelse(
-#         attitude_harvest_AnsweredAll == TRUE,
-#         rowMeans(.[myFields], na.rm = TRUE),
-#         NA
-#       )
-#     )
-#   ########Entire Scale
-#   mydata$E1_AnsweredAll <- rowSums(
-#     mydata %>%
-#       select(
-#         "attitude_catch_AnsweredAll",
-#         "attitude_numbers_AnsweredAll",
-#         "attitude_size_AnsweredAll",
-#         "attitude_harvest_AnsweredAll"
-#       )
-#   ) ==
-#     4
+  ###################################################
+  ####Attitude scales
+  ###################################################
+  ########Catch Something
+  myFields <- c("E1a", "E1k", "E1g", "E1p")
+  mydata <- mydata %>%
+    mutate(attitude_catch_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
+    mutate(
+      attitude_catch = ifelse(
+        attitude_catch_AnsweredAll == TRUE,
+        rowMeans(.[myFields], na.rm = TRUE),
+        NA
+      )
+    )
+  ########Catch Numbers
+  myFields <- c("E1e", "E1n", "E1o", "E1c")
+  mydata <- mydata %>%
+    mutate(attitude_numbers_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
+    mutate(
+      attitude_numbers = ifelse(
+        attitude_numbers_AnsweredAll == TRUE,
+        rowMeans(.[myFields], na.rm = TRUE),
+        NA
+      )
+    )
+  ########Catching Large Fish
+  myFields <- c("E1j", "E1b", "E1h", "E1m")
+  mydata <- mydata %>%
+    mutate(attitude_size_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
+    mutate(
+      attitude_size = ifelse(
+        attitude_size_AnsweredAll == TRUE,
+        rowMeans(.[myFields], na.rm = TRUE),
+        NA
+      )
+    )
+  ########Harvesting Fish
+  myFields <- c("E1i", "E1l", "E1d", "E1f")
+  mydata <- mydata %>%
+    mutate(attitude_harvest_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
+    mutate(
+      attitude_harvest = ifelse(
+        attitude_harvest_AnsweredAll == TRUE,
+        rowMeans(.[myFields], na.rm = TRUE),
+        NA
+      )
+    )
+  ########Entire Scale
+  mydata$E1_AnsweredAll <- rowSums(
+    mydata %>%
+      select(
+        "attitude_catch_AnsweredAll",
+        "attitude_numbers_AnsweredAll",
+        "attitude_size_AnsweredAll",
+        "attitude_harvest_AnsweredAll"
+      )
+  ) ==
+    4
 
-# ============================================================================
-# DISABLED 2026-06-22: these scale scores are now computed at REPORT time.
-# The scale means below and their *_AnsweredAll completeness flags are rebuilt
-# by add_scale_scores() in Analysis/BaseFunctions_2025_UPDATED.R, which reads
-# Scales.csv (single source of truth) and applies item reversals before
-# averaging. Kept here (commented) for reference; the reports overwrite these
-# columns after loading, so leaving them disabled avoids duplicate/un-reversed
-# values in the aggregated file. The composite *_AnsweredAll flag is included
-# because it depends on the sub-scale flags disabled here.
-# ============================================================================
-#   #############################################
-#   #Motivation Scales
-#   #############################################
-#   ########NonCatch
-#   myFields <- c(
-#     "C2a",
-#     "C2c",
-#     "C2f",
-#     "C2g",
-#     "C2h",
-#     "C2j",
-#     "C2l",
-#     "C2m",
-#     "C2o",
-#     "C2p"
-#   )
-#   mydata <- mydata %>%
-#     mutate(
-#       motivation_noncatch_AnsweredAll = rowSums(is.na(.[myFields])) == 0
-#     ) %>%
-#     mutate(
-#       motivation_noncatch = ifelse(
-#         motivation_noncatch_AnsweredAll == TRUE,
-#         rowMeans(.[myFields], na.rm = TRUE),
-#         NA
-#       )
-#     )
-#   ########NonCatch
-#   myFields <- c("C2b", "C2d", "C2e", "C2i", "C2k", "C2n", "C2q")
-#   mydata <- mydata %>%
-#     mutate(motivation_catch_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
-#     mutate(
-#       motivation_catch = ifelse(
-#         motivation_catch_AnsweredAll == TRUE,
-#         rowMeans(.[myFields], na.rm = TRUE),
-#         NA
-#       )
-#     )
-#   ########Psychological and Physiological
-#   myFields <- c("C2e", "C2f", "C2j", "C2m")
-#   mydata <- mydata %>%
-#     mutate(motivation_pp_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
-#     mutate(
-#       motivation_pp = ifelse(
-#         motivation_pp_AnsweredAll == TRUE,
-#         rowMeans(.[myFields], na.rm = TRUE),
-#         NA
-#       )
-#     )
-#   ########Natural Environment
-#   myFields <- c("C2a", "C2c", "C2g", "C2l")
-#   mydata <- mydata %>%
-#     mutate(
-#       motivation_natural_AnsweredAll = rowSums(is.na(.[myFields])) == 0
-#     ) %>%
-#     mutate(
-#       motivation_natural = ifelse(
-#         motivation_natural_AnsweredAll == TRUE,
-#         rowMeans(.[myFields], na.rm = TRUE),
-#         NA
-#       )
-#     )
-#   ########Social
-#   myFields <- c("C2d", "C2h", "C2o", "C2p")
-#   mydata <- mydata %>%
-#     mutate(motivation_social_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
-#     mutate(
-#       motivation_social = ifelse(
-#         motivation_social_AnsweredAll == TRUE,
-#         rowMeans(.[myFields], na.rm = TRUE),
-#         NA
-#       )
-#     )
-#   ########Fishery Resource
-#   myFields <- c("C2i", "C2k", "C2n", "C2q", "C2b")
-#   mydata <- mydata %>%
-#     mutate(
-#       motivation_resource_AnsweredAll = rowSums(is.na(.[myFields])) == 0
-#     ) %>%
-#     mutate(
-#       motivation_resource = ifelse(
-#         motivation_resource_AnsweredAll == TRUE,
-#         rowMeans(.[myFields], na.rm = TRUE),
-#         NA
-#       )
-#     )
-#   ########Entire Scale
-#   mydata$C2_AnsweredAll <- rowSums(
-#     mydata %>%
-#       select(
-#         "motivation_pp_AnsweredAll",
-#         "motivation_natural_AnsweredAll",
-#         "motivation_social_AnsweredAll",
-#         "motivation_resource_AnsweredAll"
-#       )
-#   ) ==
-#     4
+  #############################################
+  #Motivation Scales
+  #############################################
+  ########NonCatch
+  myFields <- c(
+    "C2a",
+    "C2c",
+    "C2f",
+    "C2g",
+    "C2h",
+    "C2j",
+    "C2l",
+    "C2m",
+    "C2o",
+    "C2p"
+  )
+  mydata <- mydata %>%
+    mutate(
+      motivation_noncatch_AnsweredAll = rowSums(is.na(.[myFields])) == 0
+    ) %>%
+    mutate(
+      motivation_noncatch = ifelse(
+        motivation_noncatch_AnsweredAll == TRUE,
+        rowMeans(.[myFields], na.rm = TRUE),
+        NA
+      )
+    )
+  ########NonCatch
+  myFields <- c("C2b", "C2d", "C2e", "C2i", "C2k", "C2n", "C2q")
+  mydata <- mydata %>%
+    mutate(motivation_catch_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
+    mutate(
+      motivation_catch = ifelse(
+        motivation_catch_AnsweredAll == TRUE,
+        rowMeans(.[myFields], na.rm = TRUE),
+        NA
+      )
+    )
+  ########Psychological and Physiological
+  myFields <- c("C2e", "C2f", "C2j", "C2m")
+  mydata <- mydata %>%
+    mutate(motivation_pp_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
+    mutate(
+      motivation_pp = ifelse(
+        motivation_pp_AnsweredAll == TRUE,
+        rowMeans(.[myFields], na.rm = TRUE),
+        NA
+      )
+    )
+  ########Natural Environment
+  myFields <- c("C2a", "C2c", "C2g", "C2l")
+  mydata <- mydata %>%
+    mutate(
+      motivation_natural_AnsweredAll = rowSums(is.na(.[myFields])) == 0
+    ) %>%
+    mutate(
+      motivation_natural = ifelse(
+        motivation_natural_AnsweredAll == TRUE,
+        rowMeans(.[myFields], na.rm = TRUE),
+        NA
+      )
+    )
+  ########Social
+  myFields <- c("C2d", "C2h", "C2o", "C2p")
+  mydata <- mydata %>%
+    mutate(motivation_social_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
+    mutate(
+      motivation_social = ifelse(
+        motivation_social_AnsweredAll == TRUE,
+        rowMeans(.[myFields], na.rm = TRUE),
+        NA
+      )
+    )
+  ########Fishery Resource
+  myFields <- c("C2i", "C2k", "C2n", "C2q", "C2b")
+  mydata <- mydata %>%
+    mutate(
+      motivation_resource_AnsweredAll = rowSums(is.na(.[myFields])) == 0
+    ) %>%
+    mutate(
+      motivation_resource = ifelse(
+        motivation_resource_AnsweredAll == TRUE,
+        rowMeans(.[myFields], na.rm = TRUE),
+        NA
+      )
+    )
+  ########Entire Scale
+  mydata$C2_AnsweredAll <- rowSums(
+    mydata %>%
+      select(
+        "motivation_pp_AnsweredAll",
+        "motivation_natural_AnsweredAll",
+        "motivation_social_AnsweredAll",
+        "motivation_resource_AnsweredAll"
+      )
+  ) ==
+    4
 
   ###################################################
   ####Program scales
@@ -726,58 +696,56 @@ base.create.aggregate.variables <- function(mydata, myYears) {
     ) ==
       4
   }
-  
-  #this was moved into reports along with inverting scales
-  # ###################################################
-  # ####Regulation scales
-  # ###################################################
-  # ########Regulation Complexity/Confusion
-  # myFields <- c("Q31a", "Q31e", "Q31g", "Q31h")
-  # mydata <- mydata %>%
-  #   mutate(
-  #     regulations_complexity_AnsweredAll = rowSums(is.na(.[myFields])) == 0
-  #   ) %>%
-  #   mutate(
-  #     regulations_complexity = ifelse(
-  #       regulations_complexity_AnsweredAll == TRUE,
-  #       rowMeans(.[myFields], na.rm = TRUE),
-  #       NA
-  #     )
-  #   )
-  # ########Importance Of Management Objectives
-  # myFields <- c("Q31f", "Q31i", "Q31k", "Q31l")
-  # mydata <- mydata %>%
-  #   mutate(
-  #     regulations_objectives_AnsweredAll = rowSums(is.na(.[myFields])) == 0
-  #   ) %>%
-  #   mutate(
-  #     regulations_objectives = ifelse(
-  #       regulations_objectives_AnsweredAll == TRUE,
-  #       rowMeans(.[myFields], na.rm = TRUE),
-  #       NA
-  #     )
-  #   )
-  # ########Trust/Legitimacy
-  # myFields <- c("E1b", "E1c", "E1d", "E1j")
-  # mydata <- mydata %>%
-  #   mutate(regulations_trust_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
-  #   mutate(
-  #     regulations_trust = ifelse(
-  #       regulations_trust_AnsweredAll == TRUE,
-  #       rowMeans(.[myFields], na.rm = TRUE),
-  #       NA
-  #     )
-  #   )
+  ###################################################
+  ####Regulation scales
+  ###################################################
+  ########Regulation Complexity/Confusion
+  myFields <- c("Q31a", "Q31e", "Q31g", "Q31h")
+  mydata <- mydata %>%
+    mutate(
+      regulations_complexity_AnsweredAll = rowSums(is.na(.[myFields])) == 0
+    ) %>%
+    mutate(
+      regulations_complexity = ifelse(
+        regulations_complexity_AnsweredAll == TRUE,
+        rowMeans(.[myFields], na.rm = TRUE),
+        NA
+      )
+    )
+  ########Importance Of Management Objectives
+  myFields <- c("Q31f", "Q31i", "Q31k", "Q31l")
+  mydata <- mydata %>%
+    mutate(
+      regulations_objectives_AnsweredAll = rowSums(is.na(.[myFields])) == 0
+    ) %>%
+    mutate(
+      regulations_objectives = ifelse(
+        regulations_objectives_AnsweredAll == TRUE,
+        rowMeans(.[myFields], na.rm = TRUE),
+        NA
+      )
+    )
+  ########Trust/Legitimacy
+  myFields <- c("E1b", "E1c", "E1d", "E1j")
+  mydata <- mydata %>%
+    mutate(regulations_trust_AnsweredAll = rowSums(is.na(.[myFields])) == 0) %>%
+    mutate(
+      regulations_trust = ifelse(
+        regulations_trust_AnsweredAll == TRUE,
+        rowMeans(.[myFields], na.rm = TRUE),
+        NA
+      )
+    )
   ########Entire Scale
-  # mydata$Q31_AnsweredAll <- rowSums(
-  #   mydata %>%
-  #     select(
-  #       "regulations_complexity_AnsweredAll",
-  #       "regulations_objectives_AnsweredAll",
-  #       "regulations_trust_AnsweredAll"
-  #     )
-  # ) ==
-  #   3
+  mydata$Q31_AnsweredAll <- rowSums(
+    mydata %>%
+      select(
+        "regulations_complexity_AnsweredAll",
+        "regulations_objectives_AnsweredAll",
+        "regulations_trust_AnsweredAll"
+      )
+  ) ==
+    3
 
   #############################################
   ####Fishing Frequency
