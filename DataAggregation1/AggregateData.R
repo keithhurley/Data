@@ -152,6 +152,15 @@ newSurveys <- newSurveys %>% select(-A3_recoded)
 newSurveys$A3 <- newSurveys$A3 * -1
 
 
+# #if someone makes did not fish tournament, change number answer to 0 otherwise don't get counted in # that answered
+# newSurveys$Q18a[newSurveys$Q18c==1] <- 0
+# newSurveys$Q18b[newSurveys$Q18c==1] <- 0
+# 
+# 
+# #if someone makes did not hire guide, change number answer to 0 otherwise don't get counted in # that answered
+# newSurveys$A13[newSurveys$A13a==1] <- 0
+
+
 ###recode B1 (preferred spp) to match previous surveys and add new factors
 
 newSurveys$B1_recoded <- newSurveys$B1
@@ -352,7 +361,7 @@ d <- base.create.aggregate.variables(d, myYears = c(2002, 2012, 2018, 2025))
 d <- base.data.createFactors(d)
 
 
-save(d, file = "aggregateData_20260622.rData")
+save(d, file = "aggregateData_20260624.rData")
 
 # # Tag reverse-coded items in FactorLevels_aggregated.csv so the column
 # # survives every reaggregation run.

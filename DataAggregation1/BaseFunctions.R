@@ -971,16 +971,47 @@ base.create.aggregate.variables <- function(mydata, myYears) {
   ###################################################
   ####Tournaments
   ###################################################
-  if (any(myYears %in% c(2018))) {
-    #correct number of tournament answer
+
+  if (any(myYears %in% c(2018, 2025))) {
+    
     mydata <- mydata %>%
-      mutate(A13_corrected = ifelse(is.na(A13a), A13, 0))
-    #create boolean for tournament participation
-    mydata <- mydata %>%
-      mutate(fishedTourney = ifelse(A13_corrected > 0, TRUE, NA)) %>%
-      mutate(fishedTourney = ifelse(A13_corrected == 0, FALSE, fishedTourney))
+      mutate(
+        A13_corrected = ifelse(is.na(A13a), A13, 0),
+        fishedTourney = case_when(
+          A13_corrected > 0 ~ TRUE,
+          A13_corrected == 0 ~ FALSE,
+          TRUE ~ NA
+        )
+      )
+    
   }
 
+  ###################################################
+  ####GUIDES
+  ###################################################
+  if (any(myYears %in% 2025)) {
+    
+    mydata <- mydata %>%
+      mutate(
+        Q18a_corrected = if_else(
+          is.na(Q18c),
+          Q18a,
+          0
+        ),
+        Q18b_corrected = if_else(
+          is.na(Q18c),
+          Q18b,
+          0
+        ),
+        hiredGuide = case_when(
+          Q18a_corrected > 0 | Q18b_corrected > 0 ~ TRUE,
+          Q18a_corrected == 0 & Q18b_corrected == 0 ~ FALSE,
+          TRUE ~ NA
+        )
+      )
+    
+  }
+  
   ###################################################
   ####Setlines - MO
   ###################################################
