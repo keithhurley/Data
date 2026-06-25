@@ -90,15 +90,22 @@ D3g,Cost,Barriers,FALSE,barriers_cost
 D3n,Cost,Barriers,FALSE,barriers_cost
 D3o,Cost,Barriers,FALSE,barriers_cost
 D3r,Cost,Barriers,FALSE,barriers_cost
-Q31a,Complexity and Confusion,Regulations,TRUE,reg_complexity
-Q31e,Complexity and Confusion,Regulations,FALSE,reg_complexity
-Q31g,Complexity and Confusion,Regulations,FALSE,reg_complexity
-Q31h,Complexity and Confusion,Regulations,FALSE,reg_complexity
-Q31b,Trust,Regulations,TRUE,reg_trust
-Q31c,Trust,Regulations,FALSE,reg_trust
-Q31d,Trust,Regulations,TRUE,reg_trust
-Q31j,Trust,Regulations,FALSE,reg_trust
-Q31f,Objectives,Regulations,TRUE,reg_objectives
-Q31i,Objectives,Regulations,TRUE,reg_objectives
-Q31k,Objectives,Regulations,FALSE,reg_objectives
-Q31l,Objectives,Regulations,FALSE,reg_objectives
+Q31e,Comprehension and Confidence,Regulations,FALSE,reg_comprehension
+Q31g,Comprehension and Confidence,Regulations,FALSE,reg_comprehension
+Q31h,Comprehension and Confidence,Regulations,FALSE,reg_comprehension
+Q31j,Site-Specific Support,Regulations,FALSE,reg_sitesupport
+Q31k,Site-Specific Support,Regulations,FALSE,reg_sitesupport
+Q31l,Site-Specific Support,Regulations,FALSE,reg_sitesupport
+Q31a,Uniform Preference,Regulations,FALSE,reg_uniform
+Q31b,Uniform Preference,Regulations,FALSE,reg_uniform
+Q31d,Uniform Preference,Regulations,FALSE,reg_uniform
+Q31f,Uniform Preference,Regulations,FALSE,reg_uniform
+Q31i,Uniform Preference,Regulations,FALSE,reg_uniform
+Q31j,Site-Specific Orientation,RegulationsBipolar,FALSE,reg_orientation
+Q31k,Site-Specific Orientation,RegulationsBipolar,FALSE,reg_orientation
+Q31l,Site-Specific Orientation,RegulationsBipolar,FALSE,reg_orientation
+Q31a,Site-Specific Orientation,RegulationsBipolar,TRUE,reg_orientation
+Q31b,Site-Specific Orientation,RegulationsBipolar,TRUE,reg_orientation
+Q31d,Site-Specific Orientation,RegulationsBipolar,TRUE,reg_orientation
+Q31f,Site-Specific Orientation,RegulationsBipolar,TRUE,reg_orientation
+Q31i,Site-Specific Orientation,RegulationsBipolar,TRUE,reg_orientation
