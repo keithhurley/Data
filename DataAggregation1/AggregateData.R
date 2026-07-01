@@ -155,11 +155,10 @@ newSurveys$A3 <- newSurveys$A3 * -1
 # #if someone makes did not fish tournament, change number answer to 0 otherwise don't get counted in # that answered
 # newSurveys$Q18a[newSurveys$Q18c==1] <- 0
 # newSurveys$Q18b[newSurveys$Q18c==1] <- 0
-# 
-# 
+#
+#
 # #if someone makes did not hire guide, change number answer to 0 otherwise don't get counted in # that answered
 # newSurveys$A13[newSurveys$A13a==1] <- 0
-
 
 ###recode B1 (preferred spp) to match previous surveys and add new factors
 
@@ -174,10 +173,10 @@ newSurveys <- newSurveys %>% select(-B1_recoded)
 
 
 # ###recode C1jan (days fished) to match previous surveys and add new factors
-# 
+#
 # newSurveys$C1jan_recoded <- newSurveys$C1jan + 1
 # newSurveys$C1jan_recoded[newSurveys$C1jan == 13] <- 1
-# 
+#
 # newSurveys$C1jan <- newSurveys$C1jan_recoded
 # newSurveys <- newSurveys %>% select(-C1jan_recoded)
 
@@ -187,7 +186,6 @@ newSurveys <- newSurveys %>% select(-B1_recoded)
 # newSurveys$E1f <- car::recode(newSurveys$E1f, "1=5; 2=4; 3=3;4=2;5=1")
 # newSurveys$E1k <- car::recode(newSurveys$E1k, "1=5; 2=4; 3=3;4=2;5=1")
 # newSurveys$E1l <- car::recode(newSurveys$E1l, "1=5; 2=4; 3=3;4=2;5=1")
-
 
 newSurveys <- newSurveys %>%
   rename(
@@ -359,6 +357,25 @@ d <- newSurveys %>%
 
 d <- base.create.aggregate.variables(d, myYears = c(2002, 2012, 2018, 2025))
 d <- base.data.createFactors(d)
+
+
+## Harmonize reverse-keyed attitude items across survey eras --------------
+# The reverse-coded E1 items are stored in OPPOSITE polarity in the 2002/2012
+# historical data (already pre-reversed) versus the 2018 BOSR import and the
+# 2025 survey (raw orientation). add_scale_scores() applies one uniform
+# reversal from Scales.csv, which is correct for 2018/2025 but double-flips
+# 2002/2012, inflating attitude_catch / attitude_harvest for those years.
+# Flip the 2002/2012 rows of these items onto the 2018/2025 raw orientation so
+# the uniform reversal is correct for every year. Verified to reproduce the
+# published 2018 trend report subscales (Catch 2.9/2.8/2.8, Harvest 2.6/2.4/2.4).
+e1_reverse_items <- c("E1a", "E1k", "E1f", "E1l")
+e1_flip_rows <- d$surveyYear %in% c(2002, 2012)
+for (it in e1_reverse_items) {
+  f <- d[[it]]
+  codes <- as.integer(f)
+  codes[e1_flip_rows] <- (nlevels(f) + 1L) - codes[e1_flip_rows]
+  d[[it]] <- factor(levels(f)[codes], levels = levels(f))
+}
 
 
 save(d, file = "aggregateData_20260624.rData")
